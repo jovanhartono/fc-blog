@@ -5,3 +5,10 @@
 body {
  @apply bg-white dark:bg-slate-950;
 }
+
+
+@layer components {
+    .heading-primary {
+        @apply font-heading text-lg font-bold capitalize sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl;
+    }
+}
