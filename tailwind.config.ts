@@ -20,6 +20,11 @@ const config: Config = {
         sans: ["var(--font-geist-sans)"],
         heading: ["var(--font-heading)"],
       },
+      colors: {
+        accent: "#06b6d4",
+        accentDark: "#ffdb4d",
+        dark: "#0f172a",
+      },
     },
   },
   plugins: [require("@tailwindcss/forms"), require("@tailwindcss/typography")],
