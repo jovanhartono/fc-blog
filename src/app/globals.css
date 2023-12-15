@@ -9,6 +9,6 @@ body {
 
 @layer components {
     .heading-primary {
-        @apply font-heading text-lg font-bold capitalize sm:text-xl md:text-3xl lg:text-4xl xl:text-5xl;
+        @apply font-heading text-3xl font-bold capitalize md:text-5xl xl:text-6xl;
     }
 }

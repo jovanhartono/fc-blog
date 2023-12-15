@@ -4,8 +4,8 @@ import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 
-export const Blog = defineDocumentType(() => ({
-  name: "Blog",
+export const Article = defineDocumentType(() => ({
+  name: "article",
   filePathPattern: "**/*.mdx",
   contentType: "mdx",
   fields: {
@@ -22,7 +22,7 @@ export const Blog = defineDocumentType(() => ({
 
 export default makeSource({
   contentDirPath: "content",
-  documentTypes: [Blog],
+  documentTypes: [Article],
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [

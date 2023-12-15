@@ -19,7 +19,7 @@ const cal_sans = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL(metadataConfig.url),
   title: {
-    template: `%s | ${metadataConfig.title}`,
+    template: `%s — ${metadataConfig.title}`,
     default: metadataConfig.title, // a default is required when creating a template
   },
   keywords: metadataConfig.keywords,

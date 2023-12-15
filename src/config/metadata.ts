@@ -1,5 +1,5 @@
 export const metadataConfig = {
-  title: "Jasa Cuci & Reparasi Sepatu | Fresclean",
+  title: "Fresclean",
   description:
     "Jasa perawatan sepatu profesional. Spesialis dalam membersihkan dan reparasi sepatu. Kunjungi kami untuk perawatan sepatu terbaik.",
   url: "https://fresclean.id",
