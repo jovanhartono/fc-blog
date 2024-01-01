@@ -18,7 +18,6 @@
     "next-contentlayer": "^0.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sharp": "^0.33.0",
     "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
