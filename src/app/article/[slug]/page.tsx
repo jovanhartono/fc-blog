@@ -39,10 +39,7 @@ export default function Article({ params }: { params: { slug: string } }) {
             &middot;
             <span>{(article.readingTime as ReadTimeResults).text}</span>
             &middot;
-            <Link
-              href={`/category/${article.tags[0]}`}
-              className={"font-medium capitalize text-blue-500"}
-            >
+            <Link href={`#`} className={"font-medium capitalize text-blue-500"}>
               {article.tags[0]}
             </Link>
           </div>
