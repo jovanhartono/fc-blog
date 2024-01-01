@@ -32,7 +32,7 @@ export default function Article({ params }: { params: { slug: string } }) {
     <article className="container py-8">
       <div className="relative mb-8 w-full">
         <section className="z-10 space-y-3">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <time dateTime={article.published}>
               {dayjs(article.published).format("MMMM DD, YYYY")}
             </time>
@@ -68,10 +68,10 @@ export default function Article({ params }: { params: { slug: string } }) {
         sizes="100vw"
       />
 
-      <div className="mt-4 grid grid-cols-12 gap-6">
+      <div className="mt-4 grid grid-cols-12 lg:gap-x-6">
         <div className={"col-span-12 mt-6 lg:col-span-4"}>
           <details
-            className="dark:border-light dark:text-light sticky top-6 max-h-[80vh] overflow-hidden overflow-y-auto rounded-lg border border-dark p-4 text-dark"
+            className="dark:border-light dark:text-light sticky top-6 max-h-[50vh] overflow-hidden overflow-y-auto rounded-lg border border-dark p-4 text-dark lg:max-h-[80vh]"
             open
           >
             <summary className="cursor-pointer text-lg font-semibold capitalize">
