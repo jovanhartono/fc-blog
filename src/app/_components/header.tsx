@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import HeaderLogo from "../../../../public/fc-logo-cropped.jpeg";
+import HeaderLogo from "../../../public/fc-logo-cropped.jpeg";
 
 export default function Header() {
   return (
-    <header className="container flex items-center justify-between py-6">
+    <header className="container z-50 flex h-[76px] items-center justify-between bg-white py-6">
       <Link href="/">
         <Image
           width={150}
