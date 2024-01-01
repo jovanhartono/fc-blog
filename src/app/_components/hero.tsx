@@ -1,13 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import HeroImage from "@/../public/will-breen-QbDe8JxtUp0-unsplash.jpg";
+
+import HeroImage from "../../../public/will-breen-QbDe8JxtUp0-unsplash.jpg";
 
 export default function Hero() {
   return (
     <div className="container w-full">
       <article className="relative flex h-[60vh] flex-col items-start justify-end sm:h-[85vh]">
         {/*overlay*/}
-        <div className="to-dark/90 absolute bottom-0 left-0 right-0 top-0 z-0 h-full rounded-3xl bg-gradient-to-b from-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-0 h-full rounded-3xl bg-gradient-to-b from-transparent to-dark/90" />
 
         <Image
           src={HeroImage}
@@ -25,9 +26,9 @@ export default function Hero() {
           <Link href={"/link-to-blog"} className="mt-6">
             <h1 className="heading-primary">
               <span
-                className="from-accent to-accent dark:from-accentDark/50 dark:to-accentDark/50
-                bg-gradient-to-r bg-[length:0px_6px]
-                bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_6px] "
+                className="bg-gradient-to-r from-accent to-accent bg-[length:0px_6px]
+                bg-left-bottom bg-no-repeat
+                transition-[background-size] duration-500 hover:bg-[length:100%_6px] dark:from-accentDark/50 dark:to-accentDark/50 "
               >
                 An example app built using Next.js 13 server components.
               </span>
