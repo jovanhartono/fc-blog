@@ -8,7 +8,8 @@ import Script from "next/script";
 import { metadataConfig } from "@/config/metadata";
 
 import { cn } from "@/lib/utils";
-import Header from "@/app/(home)/_components/header";
+import Footer from "@/app/_components/footer";
+import Header from "@/app/_components/header";
 
 const cal_sans = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
@@ -58,16 +59,17 @@ export default function RootLayout({
       suppressHydrationWarning={true}
       className={`${GeistSans.variable} ${cal_sans.variable}`}
     >
-      {/*    <Script id="theme-switcher" strategy="beforeInteractive">*/}
-      {/*      {`if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {*/}
+      {/*<Script id="theme-switcher" strategy="beforeInteractive">*/}
+      {/*  {`if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {*/}
       {/*  document.documentElement.classList.add('dark')*/}
       {/*} else {*/}
       {/*  document.documentElement.classList.remove('dark')*/}
       {/*}`}*/}
-      {/*    </Script>*/}
-      <body className={cn("min-h-screen antialiased")}>
+      {/*</Script>*/}
+      <body className={cn("min-h-screen bg-white antialiased dark:bg-dark")}>
         <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
