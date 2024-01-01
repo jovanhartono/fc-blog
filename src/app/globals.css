@@ -16,7 +16,7 @@
 
 @layer components {
     .heading-primary {
-        @apply font-heading text-4xl font-bold capitalize md:text-5xl xl:text-6xl;
+        @apply font-heading text-4xl capitalize md:text-5xl xl:text-6xl;
     }
 
     .article {
