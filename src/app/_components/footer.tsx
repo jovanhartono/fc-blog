@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 
 export default function Footer() {
   return (
-    <footer className="sm:m-6">
+    <footer className="container sm:p-6">
       <div className="flex w-full flex-col justify-between divide-y divide-white bg-dark px-6 text-white dark:bg-white dark:text-dark sm:rounded-xl">
         <section className="flex flex-col gap-6 py-12 lg:items-center">
           <h1 className="heading-primary">Professional | Trusted | Detail</h1>
