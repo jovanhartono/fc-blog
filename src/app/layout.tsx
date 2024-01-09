@@ -4,12 +4,12 @@ import { GeistSans } from "geist/font/sans";
 
 import "./globals.css";
 
-import Script from "next/script";
 import { metadataConfig } from "@/config/metadata";
 
 import { cn } from "@/lib/utils";
 import Footer from "@/app/_components/footer";
 import Header from "@/app/_components/header";
+import GlobalProviders from "@/app/_providers/global-providers";
 
 const cal_sans = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
@@ -56,20 +56,15 @@ export default function RootLayout({
   return (
     <html
       lang="id"
-      suppressHydrationWarning={true}
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${cal_sans.variable}`}
     >
-      {/*<Script id="theme-switcher" strategy="beforeInteractive">*/}
-      {/*  {`if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {*/}
-      {/*  document.documentElement.classList.add('dark')*/}
-      {/*} else {*/}
-      {/*  document.documentElement.classList.remove('dark')*/}
-      {/*}`}*/}
-      {/*</Script>*/}
       <body className={cn("min-h-screen bg-white antialiased dark:bg-dark")}>
-        <Header />
-        {children}
-        <Footer />
+        <GlobalProviders>
+          <Header />
+          {children}
+          <Footer />
+        </GlobalProviders>
       </body>
     </html>
   );
