@@ -1,10 +1,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { metadataConfig } from "@/config/metadata";
 import { allArticles } from "contentlayer/generated";
 import dayjs from "dayjs";
-import { useMDXComponent } from "next-contentlayer/hooks";
 import { ReadTimeResults } from "reading-time";
+
+import RenderMdx from "@/app/_components/render-mdx";
 
 export const generateStaticParams = async () =>
   allArticles.map((article) => ({ slug: article._raw.flattenedPath }));
@@ -16,7 +18,23 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
 
   if (!article) throw new Error(`article not found for slug: ${params.slug}`);
 
-  return { title: article.title, description: article.description };
+  return {
+    title: article.title,
+    description: article.description,
+    openGraph: {
+      title: article.title,
+      description: article.description,
+      url: metadataConfig.url + article.url,
+      siteName: metadataConfig.title,
+      locale: "id",
+      type: "article",
+      publishedTime: article.published,
+      images:
+        metadataConfig.url +
+        article.thumbnail.relativeFilePath.replace("../public", ""),
+      // authors: authors.length > 0 ? authors : [siteMetadata.author],
+    },
+  };
 };
 
 export default function Article({ params }: { params: { slug: string } }) {
@@ -26,12 +44,10 @@ export default function Article({ params }: { params: { slug: string } }) {
 
   if (!article) notFound();
 
-  const MDXContent = useMDXComponent(article.body.code);
-
   return (
     <article className="container py-8">
-      <div className="relative mb-8 w-full">
-        <section className="z-10 space-y-3">
+      <section className="relative mb-8 w-full">
+        <div className="z-10 space-y-3">
           <div className="flex flex-wrap items-center gap-3">
             <time dateTime={article.published}>
               {dayjs(article.published).format("MMMM DD, YYYY")}
@@ -47,19 +63,19 @@ export default function Article({ params }: { params: { slug: string } }) {
           <h1 className="heading-primary max-w-[30ch] text-left">
             {article.title}
           </h1>
-        </section>
+        </div>
 
         {/*overlay*/}
         {/*<div className="absolute inset-0 bg-dark/60 dark:bg-dark/40" />*/}
-      </div>
+      </section>
 
       <Image
-        src={article.image.filePath.replace("../public", "")}
+        src={article.thumbnail.relativeFilePath.replace("../public", "")}
         placeholder="blur"
-        blurDataURL={article.image.blurhashDataUrl}
+        blurDataURL={article.thumbnail.blurhashDataUrl}
         alt={article.title}
-        width={article.image.width}
-        height={article.image.height}
+        width={article.thumbnail.width}
+        height={article.thumbnail.height}
         className="aspect-square max-h-[65vh] w-full rounded-3xl object-cover object-center md:aspect-video"
         priority
         sizes="100vw"
@@ -68,7 +84,7 @@ export default function Article({ params }: { params: { slug: string } }) {
       <div className="mt-4 grid grid-cols-12 lg:gap-x-6">
         <div className={"col-span-12 mt-6 lg:col-span-4"}>
           <details
-            className="dark:border-light dark:text-light sticky top-6 max-h-[50vh] overflow-hidden overflow-y-auto rounded-lg border border-dark p-4 text-dark lg:max-h-[80vh]"
+            className="dark:border-light dark:text-light sticky top-[96px] max-h-[50vh] overflow-hidden overflow-y-auto rounded-lg border border-dark p-4 text-dark lg:max-h-[80vh]"
             open
           >
             <summary className="cursor-pointer text-lg font-semibold capitalize">
@@ -97,9 +113,8 @@ export default function Article({ params }: { params: { slug: string } }) {
             </ul>
           </details>
         </div>
-        <div className="article">
-          <MDXContent components={{ Image }} />
-        </div>
+
+        <RenderMdx article={article} />
       </div>
     </article>
   );

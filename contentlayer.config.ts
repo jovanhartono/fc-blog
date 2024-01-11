@@ -2,6 +2,7 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import GithubSlugger from "github-slugger";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeImgSize from "rehype-img-size";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
@@ -13,7 +14,7 @@ export const Article = defineDocumentType(() => ({
   fields: {
     title: { type: "string", required: true },
     description: { type: "string", required: true },
-    image: { type: "image", required: true },
+    thumbnail: { type: "image", required: true },
     published: { type: "date", required: true },
     tags: { type: "list", of: { type: "string" }, required: true },
   },
@@ -53,10 +54,13 @@ export const Article = defineDocumentType(() => ({
 export default makeSource({
   contentDirPath: "content",
   documentTypes: [Article],
+  onExtraFieldData: "ignore",
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
+      // @ts-ignore
+      [rehypeImgSize, { dir: "public" }],
       [rehypeAutolinkHeadings, { behavior: "append" }],
       [rehypePrettyCode],
     ],
