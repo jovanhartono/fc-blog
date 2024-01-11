@@ -10,9 +10,11 @@
     html {
         @apply scroll-smooth;
     }
+
+    main, article {
+        @apply mt-[76px]
+    }
 }
-
-
 
 @layer components {
     .heading-primary {

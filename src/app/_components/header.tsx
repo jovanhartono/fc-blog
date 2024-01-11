@@ -1,20 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import ThemeSwitcher from "@/app/_components/theme-switcher";
+
 import HeaderLogo from "../../../public/fc-logo-cropped.jpeg";
 
 export default function Header() {
   return (
-    <header className="container z-50 flex h-[76px] items-center justify-between bg-white py-6">
-      <Link href="/">
-        <Image
-          width={150}
-          height={100}
-          src={HeaderLogo}
-          alt={"fresclean header logo"}
-        />
-      </Link>
-      <h1>some heading title</h1>
+    <header className="fixed left-0 right-0 top-0 z-50 bg-white shadow-sm dark:bg-dark">
+      <section className="container flex h-[76px] items-center justify-between">
+        <Link href="/">
+          <Image
+            width={150}
+            height={"29.3"}
+            src={HeaderLogo}
+            alt={"fresclean header logo"}
+          />
+        </Link>
+        <ThemeSwitcher />
+      </section>
     </header>
   );
 }
