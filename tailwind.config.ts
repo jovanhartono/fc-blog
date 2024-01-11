@@ -15,9 +15,6 @@ const config: Config = {
         md: "2rem",
         xl: "2.5rem",
       },
-      screens: {
-        "2xl": "1536px",
-      },
     },
     extend: {
       fontFamily: {
