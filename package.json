@@ -3,31 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev\" --datalayer-port=9001",
-    "dev:prod": "TINA_PUBLIC_IS_LOCAL=false tinacms dev -c \"next dev\" --datalayer-port=9001",
-    "build": "tinacms build --partial-reindex && next build",
+    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev --turbo\" --datalayer-port=9001",
+    "build": "tinacms build && next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "@radix-ui/react-icons": "^1.3.0",
-    "@tinacms/datalayer": "^1.2.32",
     "clsx": "^2.0.0",
     "contentlayer": "^0.3.4",
     "dayjs": "^1.11.10",
     "geist": "^1.1.0",
     "github-slugger": "^2.0.0",
     "next": "14.0.4",
-    "next-auth": "^4.24.5",
     "next-contentlayer": "^0.3.4",
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tailwind-merge": "^2.0.0",
-    "tinacms": "^1.5.28",
-    "tinacms-authjs": "^1.0.5",
-    "tinacms-gitprovider-github": "^1.0.3",
-    "upstash-redis-level": "^1.1.1"
+    "tinacms": "^1.5.28"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
