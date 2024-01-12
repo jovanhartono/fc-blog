@@ -2,7 +2,7 @@ export const metadataConfig = {
   title: "Fresclean id",
   description:
     "Jasa perawatan sepatu profesional. Spesialis dalam membersihkan dan reparasi sepatu. Kunjungi kami untuk perawatan sepatu terbaik.",
-  url: "https://fresclean.id",
+  url: "https://blog.fresclean.id",
   ogImage: "https://tx.shadcn.com/og.jpg",
   language: "id",
   socialBanner: "/logo.jpeg",
