@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev -c \"next dev --turbo\" --datalayer-port=9001",
-    "build": "tinacms build && next build",
+    "dev": "next dev --turbo",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -20,14 +20,12 @@
     "next-themes": "^0.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwind-merge": "^2.0.0",
-    "tinacms": "^1.5.28"
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@ianvs/prettier-plugin-sort-imports": "^4.1.1",
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
-    "@tinacms/cli": "^1.5.39",
     "@types/node": "^20.10.4",
     "@types/react": "^18",
     "@types/react-dom": "^18",
