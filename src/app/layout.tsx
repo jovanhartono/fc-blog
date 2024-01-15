@@ -14,7 +14,7 @@ import GlobalProviders from "@/app/_providers/global-providers";
 const cal_sans = localFont({
   src: "../assets/fonts/CalSans-SemiBold.woff2",
   variable: "--font-heading",
-  display: "swap",
+  display: "block",
 });
 
 export const metadata: Metadata = {
@@ -59,7 +59,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${GeistSans.variable} ${cal_sans.variable}`}
     >
-      <body className={cn("min-h-screen bg-white antialiased dark:bg-dark")}>
+      <body className={cn("min-h-screen bg-light antialiased dark:bg-dark")}>
         <GlobalProviders>
           <Header />
           {children}
