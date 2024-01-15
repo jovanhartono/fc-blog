@@ -12,8 +12,6 @@ const config: Config = {
       center: true,
       padding: {
         DEFAULT: "1.5rem",
-        md: "2rem",
-        xl: "2.5rem",
       },
     },
     extend: {
@@ -24,7 +22,8 @@ const config: Config = {
       colors: {
         accent: "#06b6d4",
         accentDark: "#ffdb4d",
-        dark: "#0f172a",
+        dark: "rgb(0 0 0)",
+        light: "#FFF",
       },
     },
   },
