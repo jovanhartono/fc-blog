@@ -2,8 +2,8 @@ import dayjs from "dayjs";
 
 export default function Footer() {
   return (
-    <footer className="container sm:p-6">
-      <div className="flex w-full flex-col justify-between divide-y divide-white bg-dark px-6 text-white dark:bg-white dark:text-dark sm:rounded-xl">
+    <footer className="container p-0 sm:p-6">
+      <div className="flex w-full flex-col justify-between divide-y divide-white bg-slate-900 px-6 text-light dark:bg-slate-800 sm:rounded-xl">
         <section className="flex flex-col gap-6 py-12 lg:items-center">
           <h1 className="heading-primary">Professional | Trusted | Detail</h1>
           <p className="sm:w-3/5 lg:text-center">
@@ -17,9 +17,7 @@ export default function Footer() {
           </a>
         </section>
         <section className="flex flex-col-reverse justify-between gap-6 py-6 sm:flex-row sm:items-center">
-          <h1 className="">
-            © {dayjs().get("year")} Fresclean. All rights reserved.
-          </h1>
+          <span>© {dayjs().get("year")} Fresclean. All rights reserved.</span>
           <ul className="flex items-center gap-4 text-white">
             <li className="transition-transform">
               <a href="https://www.instagram.com/fresclean_id/" target="_blank">
