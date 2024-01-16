@@ -1,46 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
-
-import HeroImage from "../../../public/will-breen-QbDe8JxtUp0-unsplash.jpg";
+import { allArticles } from "contentlayer/generated";
 
 export default function Hero() {
+  const article = allArticles[0];
+
   return (
-    <div className="container w-full">
-      <article className="relative flex h-[60vh] flex-col items-start justify-end sm:h-[85vh]">
+    <section className="container w-full pt-8">
+      <div className="relative flex h-[60vh] flex-col items-start justify-end sm:h-[80vh]">
         {/*overlay*/}
-        <div className="absolute bottom-0 left-0 right-0 top-0 z-0 h-full rounded-3xl bg-gradient-to-b from-transparent to-dark/90" />
+        <div className="absolute bottom-0 left-0 right-0 top-0 z-0 h-full rounded-3xl bg-gradient-to-b from-transparent to-dark/75 dark:to-dark/50" />
 
         <Image
-          src={HeroImage}
+          src={article.thumbnail.filePath.replace("../public", "")}
           placeholder="blur"
-          // blurDataURL={blog.image.blurhashDataUrl}
-          alt={"hero image"}
+          blurDataURL={article.thumbnail.blurhashDataUrl}
+          alt={article.title}
           fill
           className="-z-10 h-full w-full rounded-3xl object-cover object-center"
           sizes="100vw"
           priority
         />
 
-        <div className="z-0 flex w-full flex-col items-start justify-center p-6 text-white sm:p-8 md:p-12 lg:w-3/4 lg:p-16">
+        <div className="z-0 flex w-full flex-col items-start justify-center p-6 text-white sm:p-8 md:p-12 lg:w-4/5 lg:p-16">
           {/*<Tag link={`/categories/${slug(blog.tags[0])}`} name={blog.tags[0]} />*/}
-          <Link href={"/link-to-blog"} className="mt-6">
+          <Link href={article.url} className="mt-6">
             <h1 className="heading-primary">
-              <span
-                className="bg-gradient-to-r from-accent to-accent bg-[length:0px_6px]
-                bg-left-bottom bg-no-repeat
-                transition-[background-size] duration-500 hover:bg-[length:100%_6px] dark:from-accentDark/50 dark:to-accentDark/50 "
-              >
-                An example app built using Next.js 13 server components.
-              </span>
+              <span className="text-highlight">{article.title}</span>
             </h1>
           </Link>
-          <p className="mt-4 hidden font-medium sm:inline-block md:text-lg lg:text-xl">
-            Integrating mindfulness practices helps developers cultivate
-            present-moment awareness, fostering focus, problem-solving, and
-            work-life balance.
+          <p className="mt-4 hidden font-medium sm:line-clamp-2 md:text-lg lg:text-xl">
+            {article.description}
           </p>
         </div>
-      </article>
-    </div>
+      </div>
+    </section>
   );
 }
