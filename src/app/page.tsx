@@ -12,7 +12,6 @@ export default function Home() {
   return (
     <main className="flex flex-col">
       <Hero />
-      <RecentArticles articles={allArticles} />
     </main>
   );
 }

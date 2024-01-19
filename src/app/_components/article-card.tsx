@@ -7,12 +7,11 @@ import { ReadTimeResults } from "reading-time";
 export default function ArticleCard({ article }: { article: Article }) {
   return (
     <Link href={article.url} key={article._id}>
-      <article className="group flex aspect-[9/11] flex-col overflow-hidden rounded-xl border border-gray-400 shadow-md sm:aspect-[9/10]">
-        <div className="relative aspect-[16/10] overflow-hidden sm:aspect-video">
+      <article className="group flex flex-col gap-6 overflow-hidden pt-6 lg:flex-row">
+        <div className="relative h-[250px] overflow-hidden lg:aspect-video lg:h-auto lg:w-[300px]">
           <Image
-            className="transition-transform ease-in-out group-hover:scale-110"
+            className="object-cover"
             fill
-            objectFit="cover"
             src={article.thumbnail.filePath.replace("../public", "")}
             alt={article.title}
             blurDataURL={article.thumbnail.blurhashDataUrl}
@@ -20,26 +19,30 @@ export default function ArticleCard({ article }: { article: Article }) {
           />
         </div>
 
-        <section className="flex grow flex-col p-4">
+        <section className="flex grow flex-col">
           <dl>
-            <dt className="line-clamp-2 font-heading text-2xl">
-              <span className="text-highlight group-hover:bg-[length:100%_6px]">
-                {article.title}
-              </span>
+            <dt className="text-sm font-medium uppercase text-blue-600">
+              {article.tags[0]}
+              {/*<span aria-label="reading time">*/}
+              {/*  {(article.readingTime as ReadTimeResults).text}*/}
+              {/*</span>*/}
             </dt>
-            <dd className="mt-1.5 line-clamp-2 text-gray-700 dark:text-gray-300 sm:line-clamp-2">
-              {article.description}
-            </dd>
+            <dt className="line-clamp-3 font-heading text-2xl group-hover:underline">
+              {article.title}
+            </dt>
+            {/*<dd className="mt-1.5 line-clamp-2 text-gray-700 dark:text-gray-300 sm:line-clamp-2">*/}
+            {/*  {article.description}*/}
+            {/*</dd>*/}
           </dl>
 
-          <div className="mt-auto flex items-center justify-between">
-            <span aria-label="reading time">
-              {(article.readingTime as ReadTimeResults).text}
-            </span>
-            <span aria-label="published at">
-              {dayjs(article.published).format("MMM DD, YYYY")}
-            </span>
-          </div>
+          {/*<div className="mt-auto flex items-center justify-between">*/}
+          {/*  <span aria-label="reading time">*/}
+          {/*    {(article.readingTime as ReadTimeResults).text}*/}
+          {/*  </span>*/}
+          {/*  <span aria-label="published at">*/}
+          {/*    {dayjs(article.published).format("MMM DD, YYYY")}*/}
+          {/*  </span>*/}
+          {/*</div>*/}
         </section>
       </article>
     </Link>

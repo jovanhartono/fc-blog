@@ -2,16 +2,20 @@ import dayjs from "dayjs";
 
 export default function Footer() {
   return (
-    <footer className="container p-0 sm:p-6">
-      <div className="flex w-full flex-col justify-between divide-y divide-white bg-slate-900 px-6 text-light dark:bg-slate-800 sm:rounded-xl">
-        <section className="flex flex-col gap-6 py-12 lg:items-center">
-          <h1 className="heading-primary">Professional | Trusted | Detail</h1>
-          <p className="sm:w-3/5 lg:text-center">
-            Follow us on instagram to learn about our services. Join over 5000+
-            members community to stay up to date with latest post.
+    <footer className="container p-0 sm:p-6 md:px-12 lg:px-14">
+      <div className="flex w-full flex-col justify-between divide-y divide-white bg-slate-900 px-6 text-light dark:bg-dark sm:rounded-xl">
+        <section className="flex flex-col gap-6 py-12 sm:items-center">
+          <h1 className="heading-primary sm:ext-center">
+            Professional | Detail | Terpercaya
+          </h1>
+
+          <p className="sm:text-center lg:w-3/5">
+            Follow kami di instagram. Bergabunglah bersama 5000+ followers untuk
+            melihat update terbaru kami. Konsultasikan masalah sepatu anda
+            dengan menekan tombol berikut.
           </p>
           <a href="https://link.fresclean.id/whatsapp" target="_blank">
-            <button className="h-12 w-full whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600 px-6 font-medium sm:w-[248px] sm:text-center">
+            <button className="h-12 w-full whitespace-nowrap rounded-lg bg-gradient-to-r from-cyan-500 to-cyan-600 px-6 font-medium dark:bg-gradient-to-r dark:from-blue-600 dark:to-blue-600 sm:text-center md:w-[248px]">
               Konsultasi Sepatu - <span className="font-semibold">Gratis</span>
             </button>
           </a>
