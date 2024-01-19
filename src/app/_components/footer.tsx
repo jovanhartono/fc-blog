@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="container p-0 sm:p-6 md:px-12 lg:px-14">
       <div className="flex w-full flex-col justify-between divide-y divide-white bg-slate-900 px-6 text-light dark:bg-dark sm:rounded-xl">
         <section className="flex flex-col gap-6 py-12 sm:items-center">
-          <h1 className="heading-primary sm:ext-center">
+          <h1 className="heading-primary sm:text-center">
             Professional | Detail | Terpercaya
           </h1>
 
