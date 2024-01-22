@@ -7,8 +7,8 @@ import "./globals.css";
 import { metadataConfig } from "@/config/metadata";
 
 import { cn } from "@/lib/utils";
-import Footer from "@/app/_components/footer";
-import Header from "@/app/_components/header";
+import Footer from "@/app/_components/layout/footer";
+import Header from "@/app/_components/layout/header";
 import GlobalProviders from "@/app/_providers/global-providers";
 
 const cal_sans = localFont({
