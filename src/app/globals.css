@@ -12,7 +12,7 @@
     }
 
     main {
-        @apply mt-[76px]
+        @apply mt-[76px] py-8 flex flex-col;
     }
 }
 
