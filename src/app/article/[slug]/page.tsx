@@ -6,7 +6,7 @@ import { allArticles } from "contentlayer/generated";
 import dayjs from "dayjs";
 import { ReadTimeResults } from "reading-time";
 
-import RenderMdx from "@/app/_components/render-mdx";
+import RenderMdx from "@/app/_components/mdx/render-mdx";
 
 export const generateStaticParams = async () =>
   allArticles.map((article) => ({ slug: article._raw.flattenedPath }));
@@ -32,7 +32,6 @@ export const generateMetadata = ({ params }: { params: { slug: string } }) => {
       images:
         metadataConfig.url +
         article.thumbnail.relativeFilePath.replace("../public", ""),
-      // authors: authors.length > 0 ? authors : [siteMetadata.author],
     },
   };
 };
@@ -55,7 +54,10 @@ export default function Article({ params }: { params: { slug: string } }) {
             &middot;
             <span>{(article.readingTime as ReadTimeResults).text}</span>
             &middot;
-            <Link href={`#`} className={"font-medium capitalize text-blue-500"}>
+            <Link
+              href={`/tag/${article.tags[0]}`}
+              className={"font-medium capitalize text-blue-500"}
+            >
               {article.tags[0]}
             </Link>
           </div>
