@@ -4,11 +4,13 @@ import { Article } from "contentlayer/generated";
 import dayjs from "dayjs";
 import { ReadTimeResults } from "reading-time";
 
+import Tag from "@/app/_components/tag";
+
 export default function ArticleCard({ article }: { article: Article }) {
   return (
     <Link href={article.url} key={article._id}>
-      <article className="group flex flex-col gap-6 overflow-hidden pt-6 lg:flex-row">
-        <div className="relative h-[250px] overflow-hidden lg:aspect-video lg:h-auto lg:w-[300px]">
+      <article className="group flex flex-col gap-3 overflow-hidden pt-6 lg:flex-row">
+        <div className="relative h-[250px] shrink-0 overflow-hidden lg:hidden">
           <Image
             className="object-cover"
             fill
@@ -20,29 +22,24 @@ export default function ArticleCard({ article }: { article: Article }) {
         </div>
 
         <section className="flex grow flex-col">
+          <Tag text={article.tags[0]} />
           <dl>
-            <dt className="text-sm font-medium uppercase text-blue-600">
-              {article.tags[0]}
-              {/*<span aria-label="reading time">*/}
-              {/*  {(article.readingTime as ReadTimeResults).text}*/}
-              {/*</span>*/}
-            </dt>
             <dt className="line-clamp-3 font-heading text-2xl group-hover:underline">
               {article.title}
             </dt>
-            {/*<dd className="mt-1.5 line-clamp-2 text-gray-700 dark:text-gray-300 sm:line-clamp-2">*/}
-            {/*  {article.description}*/}
-            {/*</dd>*/}
+            <dd className="mt-1.5 line-clamp-2 text-gray-700 dark:text-gray-300">
+              {article.description}
+            </dd>
           </dl>
 
-          {/*<div className="mt-auto flex items-center justify-between">*/}
-          {/*  <span aria-label="reading time">*/}
-          {/*    {(article.readingTime as ReadTimeResults).text}*/}
-          {/*  </span>*/}
-          {/*  <span aria-label="published at">*/}
-          {/*    {dayjs(article.published).format("MMM DD, YYYY")}*/}
-          {/*  </span>*/}
-          {/*</div>*/}
+          <div className="mt-3 flex items-center justify-between gap-3 text-sm lg:justify-start">
+            <time aria-label="published at">
+              {dayjs(article.published).format("MMM DD, YYYY")}
+            </time>
+            <span aria-label="reading time">
+              {(article.readingTime as ReadTimeResults).text}
+            </span>
+          </div>
         </section>
       </article>
     </Link>
