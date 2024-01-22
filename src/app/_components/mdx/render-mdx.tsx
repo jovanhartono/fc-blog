@@ -3,7 +3,7 @@
 import { Article } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
-import MarkdownImage from "@/app/_components/markdown-image";
+import MarkdownImage from "@/app/_components/mdx/markdown-image";
 
 export default function RenderMdx({ article }: { article: Article }) {
   const MDXContent = useMDXComponent(article.body.code);

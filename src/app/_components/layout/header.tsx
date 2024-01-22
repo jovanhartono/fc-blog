@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import ThemeSwitcher from "@/app/_components/theme-switcher";
 
-import HeaderLogo from "../../../public/fc-logo-cropped.jpeg";
+import HeaderLogo from "../../../../public/fc-logo-cropped.jpeg";
 
 export default function Header() {
   return (

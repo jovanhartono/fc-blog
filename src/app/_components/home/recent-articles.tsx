@@ -15,9 +15,9 @@ export default function RecentArticles({ articles }: { articles: Article[] }) {
     .slice(0, 3);
 
   return (
-    <div className="flex flex-col gap-3">
+    <div>
       <h1 className="heading-title">Artikel Terkini</h1>
-      <div className="flex grow flex-col gap-6 divide-y divide-black">
+      <div className="flex grow flex-col gap-6 divide-y divide-black dark:divide-light">
         {recentArticles.map((article) => (
           <ArticleCard article={article} key={article._id} />
         ))}
