@@ -19,7 +19,7 @@ export default function TagList({ className }: { className?: string }) {
     <div className={cn("flex gap-3", className)}>
       {tags.map((tag, idx) => (
         <Link className="capitalize" href={`/tag/${tag}`} key={idx}>
-          {tag}
+          {tag.replaceAll("-", " ")}
         </Link>
       ))}
     </div>
