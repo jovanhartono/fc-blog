@@ -16,11 +16,12 @@ export default function Home() {
         <div className="space-y-6">
           <dl className="flex flex-col gap-3 lg:flex-row lg:items-center">
             <dt className="heading-primary shrink-0 basis-1/2">
-              Fresclean Archives
+              Artikel Fresclean
             </dt>
             <dd className="basis-1/2 text-gray-700 dark:text-light">
-              Dive into our blog for expert tips, hacks, and insightful guides
-              on keeping your favorite pairs looking fresh and fabulous 🌟
+              Ulik artikel kami untuk mendapatkan tips, hacks, dan panduan
+              lengkap untuk menjaga sepasang sepatu favorit Anda terlihat
+              sempurna 🌟
             </dd>
           </dl>
 
