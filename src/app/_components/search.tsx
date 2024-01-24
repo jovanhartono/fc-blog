@@ -41,9 +41,9 @@ export default function Search({ className }: { className?: string }) {
         id="search"
         type="search"
         placeholder="Cari Artikel"
-        className="w-full rounded-lg bg-transparent text-base"
+        className="w-full rounded-lg bg-transparent pl-9 text-base"
       />
-      <MagnifyingGlassIcon className="absolute right-3 top-1/2 h-5 w-5 -translate-y-1/2" />
+      <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2" />
     </form>
   );
 }
