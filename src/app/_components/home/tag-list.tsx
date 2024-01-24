@@ -2,7 +2,9 @@ import Link from "next/link";
 import { allArticles } from "contentlayer/generated";
 import { slug } from "github-slugger";
 
-export default function TagList() {
+import { cn } from "@/lib/utils";
+
+export default function TagList({ className }: { className?: string }) {
   const tags = Array.from(
     allArticles.reduce(
       (tagSet, article) => {
@@ -14,7 +16,7 @@ export default function TagList() {
   );
 
   return (
-    <div className="flex gap-3">
+    <div className={cn("flex gap-3", className)}>
       {tags.map((tag, idx) => (
         <Link className="capitalize" href={`/tag/${tag}`} key={idx}>
           {tag}
