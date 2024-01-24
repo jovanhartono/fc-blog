@@ -17,7 +17,17 @@ export default function Header() {
             alt={"fresclean header logo"}
           />
         </Link>
-        <ThemeSwitcher />
+        <div className="flex items-center gap-3 lg:gap-6">
+          <a
+            target="_blank noopener noreferer"
+            href="https://link.fresclean.id"
+            className="relative flex h-7 items-center gap-3 rounded-xl bg-blue-500 px-3 dark:bg-blue-600"
+          >
+            <div className="absolute right-0 top-0 h-2 w-2 animate-ping rounded-full bg-blue-700 duration-500" />
+            <span className="text-light">Konsultasi</span>
+          </a>
+          <ThemeSwitcher />
+        </div>
       </section>
     </header>
   );
