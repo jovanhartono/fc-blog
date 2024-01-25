@@ -34,6 +34,10 @@ export const metadata: Metadata = {
     locale: "id",
     type: "website",
   },
+  twitter: {
+    title: metadataConfig.title,
+    description: metadataConfig.description,
+  },
   robots: {
     index: true,
     follow: true,
