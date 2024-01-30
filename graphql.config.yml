@@ -1,0 +1,2 @@
+schema: https://fresclean.id/graphql
+documents: 'src/**/*.{graphql,ts,tsx}'

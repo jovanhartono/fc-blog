@@ -2,72 +2,96 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { metadataConfig } from "@/config/metadata";
-import { allArticles } from "contentlayer/generated";
+import {
+  getAllArticleWithSlug,
+  getArticleBySlugQuery,
+} from "@/gql/queries/article";
 import dayjs from "dayjs";
-import { ReadTimeResults } from "reading-time";
+import readingTime from "reading-time";
 
-import RenderMdx from "@/app/_components/mdx/render-mdx";
+import { getClient } from "@/lib/apollo";
+import { toc } from "@/lib/utils";
+import RenderHTML from "@/app/_components/render-html";
 
-export const generateStaticParams = async () =>
-  allArticles.map((article) => ({ slug: article._raw.flattenedPath }));
+export const revalidate = 10;
 
-export const generateMetadata = ({ params }: { params: { slug: string } }) => {
-  const article = allArticles.find(
-    (article) => article._raw.flattenedPath === params.slug,
-  );
+export const generateStaticParams = async () => {
+  const { data } = await getClient().query({
+    query: getAllArticleWithSlug,
+  });
+
+  return data.posts?.edges.map((post) => ({ slug: post.node.slug }));
+};
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { slug: string };
+}) => {
+  const { data } = await getClient().query({
+    query: getArticleBySlugQuery,
+    variables: {
+      id: params.slug,
+    },
+  });
+  const article = data.post;
 
   if (!article) throw new Error(`article not found for slug: ${params.slug}`);
 
   return {
     title: article.title,
-    description: article.description,
+    description: article.acf?.description,
     twitter: {
       title: article.title,
-      description: article.description,
+      description: article.acf?.description,
     },
     openGraph: {
       title: article.title,
-      description: article.description,
-      url: metadataConfig.url + article.url,
+      description: article.acf?.description,
+      url: `${metadataConfig.url}/article/${article.slug}`,
       siteName: metadataConfig.title,
       locale: "id",
       type: "article",
-      publishedTime: article.published,
-      images:
-        metadataConfig.url +
-        article.thumbnail.relativeFilePath.replace("../public", ""),
+      publishedTime: dayjs(article.date).format("DD-MM-YYYY"),
+      images: article.featuredImage,
     },
   };
 };
 
-export default function Article({ params }: { params: { slug: string } }) {
-  const article = allArticles.find(
-    (article) => article._raw.flattenedPath === params.slug,
-  );
+export default async function Article({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { data } = await getClient().query({
+    query: getArticleBySlugQuery,
+    variables: {
+      id: params.slug,
+    },
+  });
 
-  if (!article) notFound();
+  if (!data.post) notFound();
+  const article = data.post;
 
   return (
     <article className="container mt-[76px] py-8">
       <section className="relative mb-8 w-full">
         <div className="z-10 space-y-3">
           <div className="flex flex-wrap items-center gap-3">
-            <time dateTime={article.published}>
-              {dayjs(article.published).format("MMMM DD, YYYY")}
-            </time>
+            <time>{dayjs(article.date).format("MMMM DD, YYYY")}</time>
             &middot;
-            <span>{(article.readingTime as ReadTimeResults).text}</span>
+            <span>{readingTime(article.content || "").text}</span>
             &middot;
             <Link
-              href={`/tag/${article.tags[0]}`}
+              href={`/tag/${article.categories?.edges[0].node.slug}`}
               className={"font-medium capitalize text-blue-500"}
             >
-              {article.tags[0]}
+              {article.categories?.edges[0].node.name}
             </Link>
           </div>
 
           <h1 className="heading-primary max-w-[30ch] text-left">
-            {article.title}
+            {data.post.title}
           </h1>
         </div>
 
@@ -76,12 +100,10 @@ export default function Article({ params }: { params: { slug: string } }) {
       </section>
 
       <Image
-        src={article.thumbnail.relativeFilePath.replace("../public", "")}
-        placeholder="blur"
-        blurDataURL={article.thumbnail.blurhashDataUrl}
-        alt={article.title}
-        width={article.thumbnail.width}
-        height={article.thumbnail.height}
+        src={article.featuredImage!.node.sourceUrl!}
+        alt={`${article.featuredImage?.node.altText} thumbnail`}
+        width={2000}
+        height={1000}
         className="aspect-square max-h-[65vh] w-full rounded-3xl object-cover object-center md:aspect-video"
         priority
         sizes="100vw"
@@ -97,7 +119,7 @@ export default function Article({ params }: { params: { slug: string } }) {
               Table Of Content
             </summary>
             <ul className="font-in mt-4 text-base">
-              {article.toc.map((heading: any) => (
+              {toc(article.content).map((heading: any) => (
                 <li key={`#${heading.slug}`} className="py-1">
                   <a
                     href={`#${heading.slug}`}
@@ -119,8 +141,7 @@ export default function Article({ params }: { params: { slug: string } }) {
             </ul>
           </details>
         </div>
-
-        <RenderMdx article={article} />
+        <RenderHTML content={article.content} />
       </div>
     </article>
   );
