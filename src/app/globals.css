@@ -42,6 +42,7 @@
 
             prose-headings:scroll-mt-[100px]
             prose-headings:text-black
+            dark:prose-headings:text-light
 
         prose-headings:font-heading
         prose-headings:font-normal
