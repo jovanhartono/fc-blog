@@ -1,22 +1,22 @@
 import { Suspense } from "react";
 import { Metadata } from "next";
-import { allArticles } from "contentlayer/generated";
-import { slug } from "github-slugger";
+import { notFound } from "next/navigation";
+import {
+  getAllArticleByCategory,
+  getArticleCategories,
+} from "@/gql/queries/article";
 
+import { getClient } from "@/lib/apollo";
 import ArticlePagination from "@/app/_components/article-pagination";
 import TagList from "@/app/_components/home/tag-list";
 import Search from "@/app/_components/search";
 
 export async function generateStaticParams() {
-  return Array.from(
-    allArticles.reduce(
-      (tagSet, article) => {
-        article.tags.forEach((tag) => tagSet.add(slug(tag)));
-        return tagSet;
-      },
-      new Set(["all"]),
-    ),
-  ).map((tag) => ({ tag: tag.toLowerCase() }));
+  const { data } = await getClient().query({
+    query: getArticleCategories,
+  });
+
+  return data.categories?.edges.map((category) => category.node.slug);
 }
 
 export const metadata: Metadata = {
@@ -24,32 +24,39 @@ export const metadata: Metadata = {
   description: `Pelajari lebih lanjut tentang melalui artikel terbaik kami`,
 };
 
-function filteredArticles(tag: string, search?: string) {
-  const articles = search
-    ? allArticles.filter((article) =>
-        article.title.toLowerCase().includes(search.toLowerCase()),
-      )
-    : allArticles;
-
-  if (tag === "all") {
-    return articles;
-  }
-
-  return articles
-    .map((article) => ({
-      ...article,
-      tags: article.tags.map((tag) => slug(tag)),
-    }))
-    .filter((article) => article.tags.includes(tag));
-}
-
-export default function TagPage({
+export default async function TagPage({
   params,
   searchParams,
 }: {
   params: { tag: string };
   searchParams: { search?: string };
 }) {
+  let { data } = await getClient().query({
+    query: getAllArticleByCategory,
+    variables: {
+      /* passing an empty string "" to categoryName will return all article
+        if tag === all return all article, otherwise return filtered article by its categor
+      y*/
+      categoryName: params.tag === "all" ? "" : params.tag,
+    },
+  });
+
+  if (!data.posts) return notFound();
+
+  const articles = {
+    ...data,
+    posts: {
+      ...data.posts,
+      edges:
+        data.posts?.edges?.filter(
+          ({ node }) =>
+            node.title
+              ?.toLowerCase()
+              .includes(searchParams.search?.toLowerCase() || ""),
+        ) || [],
+    },
+  };
+
   return (
     <main className="container gap-12">
       <div className="space-y-6">
@@ -65,7 +72,7 @@ export default function TagPage({
 
         <hr className="h-0.5 w-full bg-dark" />
 
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between lg:gap-12">
+        <div className="flex flex-col gap-6 lg:flex-row lg:justify-between lg:gap-12">
           <TagList className="basis-1/2" />
           <Suspense
             fallback={
@@ -77,9 +84,7 @@ export default function TagPage({
         </div>
       </div>
 
-      <ArticlePagination
-        articles={filteredArticles(params.tag, searchParams.search)}
-      />
+      <ArticlePagination articles={articles} />
     </main>
   );
 }

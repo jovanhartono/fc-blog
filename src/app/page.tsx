@@ -1,15 +1,28 @@
 import type { Metadata } from "next";
-import { allArticles } from "contentlayer/generated";
+import { notFound } from "next/navigation";
+import { Post } from "@/__generated__/graphql";
+import { getHomepageArticle } from "@/gql/queries/article";
 
+import { getClient } from "@/lib/apollo";
+import ArticleCard from "@/app/_components/article-card";
 import FeaturedArticle from "@/app/_components/home/featured-article";
-import RecentArticles from "@/app/_components/home/recent-articles";
 import TagList from "@/app/_components/home/tag-list";
 
 export const metadata: Metadata = {
   title: "Perawatan & Reparasi Sepatu Terbaik",
 };
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await getClient().query({
+    query: getHomepageArticle,
+  });
+
+  if (!data || !data.posts?.edges) {
+    return notFound();
+  }
+
+  const articles = data.posts.edges;
+
   return (
     <main>
       <section className="container flex w-full flex-col gap-12">
@@ -31,8 +44,18 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-          <FeaturedArticle article={allArticles[0]} />
-          <RecentArticles articles={allArticles} />
+          <FeaturedArticle article={articles[0].node as Post} />
+          <div>
+            <h1 className="heading-title">Artikel Terkini</h1>
+            <div className="flex grow flex-col gap-6 divide-y divide-black dark:divide-light">
+              {articles.slice(1).map((article) => (
+                <ArticleCard
+                  article={article.node as Post}
+                  key={article.node.slug}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </main>

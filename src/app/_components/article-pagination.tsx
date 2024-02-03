@@ -1,17 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { Article } from "contentlayer/generated";
+import { ArticlesByCategoryQuery, Post } from "@/__generated__/graphql";
 
 import ArticleCard from "@/app/_components/article-card";
 
 const articlePaginationLimit = 10;
 
 export default function ArticlePagination({
-  articles,
+  articles: articlesProps,
 }: {
-  articles: Article[];
+  articles: ArticlesByCategoryQuery;
 }) {
+  const articles = articlesProps?.posts?.edges ?? [];
   const [start, setStart] = useState<number>(0);
   const next = start + articlePaginationLimit;
 
@@ -29,7 +30,7 @@ export default function ArticlePagination({
         {articles
           .slice(start, start + articlePaginationLimit)
           .map((article) => (
-            <ArticleCard article={article} key={article._id} />
+            <ArticleCard article={article.node as Post} key={article.node.id} />
           ))}
       </div>
 

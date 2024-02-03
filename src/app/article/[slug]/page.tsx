@@ -20,7 +20,7 @@ export const generateStaticParams = async () => {
     query: getAllArticleWithSlug,
   });
 
-  return data.posts?.edges.map((post) => ({ slug: post.node.slug }));
+  return data.posts?.edges.map((post) => ({ slug: post.node.slug })) ?? [];
 };
 
 export const generateMetadata = async ({
