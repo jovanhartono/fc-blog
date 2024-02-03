@@ -2,7 +2,6 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import GithubSlugger from "github-slugger";
 import readingTime from "reading-time";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeImgSize from "rehype-img-size";
 import rehypePrettyCode from "rehype-pretty-code";
 import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
@@ -59,8 +58,6 @@ export default makeSource({
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
       rehypeSlug,
-      // @ts-ignore
-      [rehypeImgSize, { dir: "public" }],
       [rehypeAutolinkHeadings, { behavior: "append" }],
       [rehypePrettyCode],
     ],
