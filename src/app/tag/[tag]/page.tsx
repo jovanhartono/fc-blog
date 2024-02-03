@@ -15,8 +15,12 @@ export async function generateStaticParams() {
   const { data } = await getClient().query({
     query: getArticleCategories,
   });
+  const categories = [
+    "all",
+    ...(data.categories?.edges.map((category) => category.node.slug) ?? []),
+  ];
 
-  return data.categories?.edges.map((category) => category.node.slug);
+  return categories.map((tag) => ({ tag }));
 }
 
 export const metadata: Metadata = {
@@ -31,11 +35,11 @@ export default async function TagPage({
   params: { tag: string };
   searchParams: { search?: string };
 }) {
-  let { data } = await getClient().query({
+  const { data } = await getClient().query({
     query: getAllArticleByCategory,
     variables: {
       /* passing an empty string "" to categoryName will return all article
-        if tag === all return all article, otherwise return filtered article by its categor
+        if tag === all return all article, otherwise return filtered article by its category
       y*/
       categoryName: params.tag === "all" ? "" : params.tag,
     },
@@ -48,11 +52,10 @@ export default async function TagPage({
     posts: {
       ...data.posts,
       edges:
-        data.posts?.edges?.filter(
-          ({ node }) =>
-            node.title
-              ?.toLowerCase()
-              .includes(searchParams.search?.toLowerCase() || ""),
+        data.posts?.edges?.filter(({ node }) =>
+          node.title
+            ?.toLowerCase()
+            .includes(searchParams.search?.toLowerCase() || ""),
         ) || [],
     },
   };
