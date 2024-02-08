@@ -8,6 +8,8 @@ import ArticleCard from "@/app/_components/article-card";
 import FeaturedArticle from "@/app/_components/home/featured-article";
 import TagList from "@/app/_components/home/tag-list";
 
+export const revalidate = 10;
+
 export const metadata: Metadata = {
   title: "Perawatan & Reparasi Sepatu Terbaik",
 };
