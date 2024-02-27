@@ -53,7 +53,7 @@ export const generateMetadata = async ({
       locale: "id",
       type: "article",
       publishedTime: dayjs(article.date).format("DD-MM-YYYY"),
-      images: article.featuredImage,
+      images: article.featuredImage!.node.sourceUrl!,
     },
   };
 };
