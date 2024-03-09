@@ -15,6 +15,7 @@ export const getHomepageArticle = graphql(/* GraphQL */ `
             node {
               sourceUrl
               altText
+              srcSet
             }
           }
           categories {
@@ -34,7 +35,7 @@ export const getHomepageArticle = graphql(/* GraphQL */ `
 
 export const getAllArticleByCategory = graphql(/* GraphQL */ `
   query ArticlesByCategory($categoryName: String!) {
-    posts(where: { categoryName: $categoryName }) {
+    posts(first: 99999999, where: { categoryName: $categoryName }) {
       edges {
         node {
           id
@@ -42,6 +43,13 @@ export const getAllArticleByCategory = graphql(/* GraphQL */ `
           slug
           acf {
             summary
+          }
+          featuredImage {
+            node {
+              sourceUrl
+              altText
+              srcSet
+            }
           }
           date
           content
@@ -93,6 +101,7 @@ export const getArticleBySlugQuery = graphql(/* GraphQL */ `
         node {
           sourceUrl
           altText
+          srcSet
         }
       }
       categories {
