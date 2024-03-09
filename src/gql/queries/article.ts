@@ -75,7 +75,7 @@ export const getArticleCategories = graphql(/* GraphQL */ `
 
 export const getAllArticleWithSlug = graphql(/* GraphQL */ `
   query ArticleSlug {
-    posts(where: { status: PUBLISH }) {
+    posts(first: 999999, where: { status: PUBLISH }) {
       edges {
         node {
           slug
