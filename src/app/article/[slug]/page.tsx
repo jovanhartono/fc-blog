@@ -2,25 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { metadataConfig } from "@/config/metadata";
-import {
-  getAllArticleWithSlug,
-  getArticleBySlugQuery,
-} from "@/gql/queries/article";
+import { getArticleBySlugQuery } from "@/gql/queries/article";
 import dayjs from "dayjs";
 import readingTime from "reading-time";
 
 import { getClient } from "@/lib/apollo";
 import { toc } from "@/lib/utils";
+import { getAllArticleSlugs } from "@/lib/wp";
 import RenderHTML from "@/app/_components/render-html";
 
-export const revalidate = 10;
+export const revalidate = 3600;
 
 export const generateStaticParams = async () => {
-  const { data } = await getClient().query({
-    query: getAllArticleWithSlug,
-  });
+  const slugs = await getAllArticleSlugs();
 
-  return data.posts?.edges.map((post) => ({ slug: post.node.slug })) ?? [];
+  return slugs.map(({ slug }) => ({ slug })) ?? [];
 };
 
 export const generateMetadata = async ({

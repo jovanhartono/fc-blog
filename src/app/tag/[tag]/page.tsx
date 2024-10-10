@@ -11,7 +11,7 @@ import ArticlePagination from "@/app/_components/article-pagination";
 import TagList from "@/app/_components/home/tag-list";
 import Search from "@/app/_components/search";
 
-export const revalidate = 10;
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const { data } = await getClient().query({

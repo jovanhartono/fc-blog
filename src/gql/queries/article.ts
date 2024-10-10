@@ -79,6 +79,7 @@ export const getAllArticleWithSlug = graphql(/* GraphQL */ `
       edges {
         node {
           slug
+          modifiedGmt
         }
       }
     }
