@@ -7,7 +7,7 @@ type Route = {
   lastModified: string;
 };
 
-const baseUrl = "https://blog.fresclean.id";
+const baseUrl = "https://www.blog.fresclean.id";
 
 export const dynamic = "force-dynamic";
 
