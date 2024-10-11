@@ -1,8 +1,6 @@
 import { MetadataRoute } from "next";
 
-const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : "http://localhost:3000";
+const baseUrl = "https://blog.fresclean.id";
 
 export default function robots(): MetadataRoute.Robots {
   return {
