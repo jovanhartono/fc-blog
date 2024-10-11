@@ -22,7 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const tagsPromise = getAllArticleCategories().then((slugs) =>
     slugs.map(({ slug }) => ({
       url: `${baseUrl}/tag/${slug}`,
-      lastModified: new Date().toString(),
+      lastModified: new Date().toISOString(),
     })),
   );
 
