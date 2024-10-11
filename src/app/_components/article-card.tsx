@@ -15,7 +15,7 @@ export default function ArticleCard({ article }: { article: Post }) {
             className="object-cover"
             fill
             src={article.featuredImage?.node.sourceUrl!}
-            alt={article.featuredImage?.node.altText || ""}
+            alt={article.featuredImage?.node.altText || article.title || ""}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
           />
         </div>
