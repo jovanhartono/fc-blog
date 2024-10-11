@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import dayjs from "dayjs";
 
 import { getAllArticleCategories, getAllArticleSlugs } from "@/lib/wp";
 
@@ -15,14 +16,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const articlesPromise = getAllArticleSlugs().then((slugs) =>
     slugs.map(({ slug, modifiedGmt }) => ({
       url: `${baseUrl}/article/${slug}`,
-      lastModified: modifiedGmt || new Date().toString(),
+      lastModified: dayjs(modifiedGmt).format() || dayjs().format(),
     })),
   );
 
   const tagsPromise = getAllArticleCategories().then((slugs) =>
     slugs.map(({ slug }) => ({
       url: `${baseUrl}/tag/${slug}`,
-      lastModified: new Date().toISOString(),
+      lastModified: dayjs().format(),
     })),
   );
 
